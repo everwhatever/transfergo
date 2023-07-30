@@ -7,38 +7,33 @@ namespace App\NotificationPublisher\Infrastructure\SMS;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
-use Twilio\Exceptions\ConfigurationException;
-use Twilio\Rest\Client;
+use Symfony\Component\Notifier\Exception\TransportExceptionInterface;
+use Symfony\Component\Notifier\Message\SmsMessage;
+use Symfony\Component\Notifier\TexterInterface;
 use App\NotificationPublisher\Domain\NotificationChannel\SMSNotificationProvider;
 
 class TwilioSMSProvider extends SMSNotificationProvider
 {
-    private string $twilioAccountSid;
-    private string $twilioAuthToken;
-    private string $twilioFromNumber;
+    private TexterInterface $texter;
 
-    public function __construct(string $twilioAccountSid, string $twilioAuthToken, string $twilioFromNumber)
+    public function __construct(TexterInterface $texter)
     {
-        $this->twilioAccountSid = $twilioAccountSid;
-        $this->twilioAuthToken = $twilioAuthToken;
-        $this->twilioFromNumber = $twilioFromNumber;
+        $this->texter = $texter;
     }
 
     /**
-     * @throws ConfigurationException
+     * @throws TransportExceptionInterface
      */
     public function sendSMS(string $recipient, string $message): bool
     {
-        $twilioClient = new Client($this->twilioAccountSid, $this->twilioAuthToken);
-
         try {
-            $twilioClient->messages->create(
+
+            $sms = new SmsMessage(
                 $recipient,
-                [
-                    'from' => $this->twilioFromNumber,
-                    'body' => $message,
-                ]
+                $message,
             );
+
+            $this->texter->send($sms);
 
             return true;
         } catch (\Exception $e) {

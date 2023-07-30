@@ -13,6 +13,15 @@
             "tests/bootstrap.php"
         ]
     },
+    "symfony/amazon-sns-notifier": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.4",
+            "ref": "ad3df83c54f93edca7a1368da172fe9e513ace6a"
+        }
+    },
     "symfony/console": {
         "version": "5.4",
         "recipe": {
@@ -68,6 +77,18 @@
             "config/packages/messenger.yaml"
         ]
     },
+    "symfony/notifier": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.0",
+            "ref": "178877daf79d2dbd62129dd03612cb1a2cb407cc"
+        },
+        "files": [
+            "config/packages/notifier.yaml"
+        ]
+    },
     "symfony/phpunit-bridge": {
         "version": "6.2",
         "recipe": {
@@ -95,5 +116,14 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
+    },
+    "symfony/twilio-notifier": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.0",
+            "ref": "10af129fcac6d00ffc9bb23d039d997dee35e657"
+        }
     }
 }

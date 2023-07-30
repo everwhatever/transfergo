@@ -6,7 +6,7 @@ use App\NotificationPublisher\Application\Service\NotificationProviderInterface;
 
 abstract class SMSNotificationProvider implements NotificationProviderInterface
 {
-    public function send(string $recipient, string $message): bool
+    public function send(string $recipient, string $message, string $subject = ''): bool
     {
         $result = $this->sendSMS($recipient, $message);
 
