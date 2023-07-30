@@ -4,5 +4,5 @@ namespace App\NotificationPublisher\Application\Service;
 
 interface NotificationProviderInterface
 {
-    public function send(string $recipient, string $message): bool;
+    public function send(string $recipient, string $message, string $subject = ''): bool;
 }

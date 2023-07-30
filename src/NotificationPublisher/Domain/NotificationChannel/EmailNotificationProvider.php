@@ -4,10 +4,15 @@ namespace App\NotificationPublisher\Domain\NotificationChannel;
 
 use App\NotificationPublisher\Application\Service\NotificationProviderInterface;
 
-class EmailNotificationProvider implements NotificationProviderInterface
+abstract class EmailNotificationProvider implements NotificationProviderInterface
 {
-    public function send(string $recipient, string $message): bool
+    public function send(string $recipient, string $message, string $subject): bool
     {
-        // TODO: Implement send() method.
+        $result = $this->sendEmail($recipient, $message, $subject);
+
+        // You can add additional common logic here if needed
+
+        return $result;
     }
+    abstract public function sendEmail(string $recipient, string $message, string $subject): bool;
 }
