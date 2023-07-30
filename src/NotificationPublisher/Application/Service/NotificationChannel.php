@@ -13,11 +13,11 @@ class NotificationChannel implements NotificationChannelInterface
         $this->providers = $providers;
     }
 
-    public function sendNotification(string $recipient, string $message): bool
+    public function sendNotification(string $recipient, string $message, string $subject = ''): bool
     {
         foreach ($this->providers as $provider) {
             if ($provider instanceof NotificationProviderInterface) {
-                if ($provider->send($recipient, $message)) {
+                if ($provider->send($recipient, $message, $subject)) {
                     return true;
                 }
             }
