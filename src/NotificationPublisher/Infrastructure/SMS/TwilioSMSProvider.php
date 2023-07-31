@@ -27,7 +27,6 @@ class TwilioSMSProvider extends SMSNotificationProvider
     public function sendSMS(string $recipient, string $message): bool
     {
         try {
-
             $sms = new SmsMessage(
                 $recipient,
                 $message,
@@ -37,7 +36,6 @@ class TwilioSMSProvider extends SMSNotificationProvider
 
             return true;
         } catch (\Exception $e) {
-            // Log the error using Monolog
             $logger = new Logger('twilio_sms');
             $logger->pushHandler(new StreamHandler('src/file.log', Level::Error));
             $logger->error('Twilio API Error: ' . $e->getMessage(), ['exception' => $e]);

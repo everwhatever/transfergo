@@ -1,0 +1,3 @@
+notification_providers:
+    aws_ses: 'App\NotificationPublisher\Infrastructure\Email\AWSEmailProvider'
+    twilio: 'App\NotificationPublisher\Infrastructure\SMS\TwilioSMSProvider'
