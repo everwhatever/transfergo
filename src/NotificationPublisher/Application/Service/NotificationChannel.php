@@ -13,14 +13,14 @@ class NotificationChannel implements NotificationChannelInterface
         $this->providers = $providerFactory->createProviders($providerNames);
     }
 
-    public function sendNotification(string $recipient, string $message, string $subject = ''): void
+    public function sendNotification(string $recipient, string $message): void
     {
         foreach ($this->providers as $provider) {
             if (!$provider instanceof NotificationProviderInterface) {
                 continue;
             }
 
-            if ($provider->send($recipient, $message, $subject)) {
+            if ($provider->send($recipient, $message)) {
                 return;
             }
         }

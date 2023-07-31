@@ -3,18 +3,14 @@
 namespace App\NotificationPublisher\Domain\NotificationChannel;
 
 use App\NotificationPublisher\Application\Service\NotificationProviderInterface;
+use Symfony\Component\Notifier\TexterInterface;
 
 abstract class SMSNotificationProvider implements NotificationProviderInterface
 {
-    public function send(string $recipient, string $message, string $subject = ''): bool
+    protected TexterInterface $texter;
+
+    public function __construct(TexterInterface $texter)
     {
-        $result = $this->sendSMS($recipient, $message);
-
-        // You can add additional common logic here if needed
-
-        return $result;
+        $this->texter = $texter;
     }
-
-    // This method must be implemented by specific providers like TwilioSMSProvider
-    abstract public function sendSMS(string $recipient, string $message): bool;
 }

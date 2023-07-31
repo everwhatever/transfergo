@@ -9,22 +9,14 @@ use Monolog\Level;
 use Monolog\Logger;
 use Symfony\Component\Notifier\Exception\TransportExceptionInterface;
 use Symfony\Component\Notifier\Message\SmsMessage;
-use Symfony\Component\Notifier\TexterInterface;
 use App\NotificationPublisher\Domain\NotificationChannel\SMSNotificationProvider;
 
 class TwilioSMSProvider extends SMSNotificationProvider
 {
-    private TexterInterface $texter;
-
-    public function __construct(TexterInterface $texter)
-    {
-        $this->texter = $texter;
-    }
-
     /**
      * @throws TransportExceptionInterface
      */
-    public function sendSMS(string $recipient, string $message): bool
+    public function send(string $recipient, string $message): bool
     {
         try {
             $sms = new SmsMessage(

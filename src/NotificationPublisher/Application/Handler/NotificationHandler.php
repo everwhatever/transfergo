@@ -18,9 +18,8 @@ class NotificationHandler implements MessageHandlerInterface
     public function __invoke(NotificationMessage $message): void
     {
         $recipient = $message->recipient;
-        $subject = $message->subject;
         $messageText = $message->message;
 
-        $this->notificationChannel->sendNotification($recipient, $messageText, $subject);
+        $this->notificationChannel->sendNotification($recipient, $messageText);
     }
 }
